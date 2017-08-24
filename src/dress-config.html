@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tahiti customize - Dress configuration</title>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script type="text/javascript"
+            src="js/dress-config.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/dress-config.css"/>
+</head>
+<body>
+<main ng-app="DressConfigApp">
+    <article ng-controller="DressConfigCtrl" class="dress-config">
+        <section id="silhouette-section">
+            <tahiti-radio-group id="silhouette-sizes"
+                                class="silhouette-sizes-aside"
+                                caption-icon=""
+                                caption-title="Taille"
+                                items="lists.sizes"
+                                ng-model="sizeId"></tahiti-radio-group>
+            <div id="silhouette-main-content">
+                <tahiti-total-price id="silhouette-section-price"
+                                    total="total"></tahiti-total-price>
+                <div id="silhouette-section-image-slider"></div>
+            </div>
+        </section>
+        <section id="dress-configuration-options"></section>
+        <section id="delivery-section"></section>
+    </article>
+    <script id="/tahiti-radio-group.html" type="text/ng-template">
+        <h2>
+            <img ng-if="captionIcon"
+                 ng-src="{{::captionIcon}}" alt="{{::captionTitle}}"/>
+            <span ng-bind="::captionTitle"></span>
+        </h2>
+        <ul>
+            <li ng-repeat="item in items track by $index">
+                <label for="{{id + '-' + item.id}}">
+                    <input id="{{id + '-' + item.id}}"
+                           ng-checked="item.id === local.selectedId"
+                           ng-model="local.selectedId"
+                           ng-change="handleChange(item.id)"
+                           type="radio"
+                           name="{{::id}}"
+                           value="{{::item.id}}"/>
+                    <span ng-bind="::item.label"></span>
+                </label>
+            </li>
+        </ul>
+    </script>
+    <script id="/tahiti-total-price.html" type="text/ng-template">
+        <p class="dress-config__total-price">
+            <span>Total&nbsp;&hyphen;</span>
+            <span class="dress-config__total-price-amount" ng-bind="total.amount"></span>
+            <span class="dress-config__total-price-currency" ng-bind="::total.currency"></span>
+        </p>
+    </script>
+</main>
+</body>
+</html>
