@@ -1,2 +1,3 @@
-# tahiti-customize
-Tahiti dress configurator
+# tahiti-customize #
+
+Tahiti customize dress configuration tool
