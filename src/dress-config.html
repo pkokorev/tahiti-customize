@@ -4,9 +4,11 @@
     <meta charset="UTF-8"/>
     <title>Tahiti customize - Dress configuration</title>
     <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
     <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.5/papaparse.min.js"></script>
     <script type="text/javascript"
             src="js/dress-config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/dress-config.css"/>
@@ -15,29 +17,49 @@
 <main ng-app="DressConfigApp">
     <article ng-controller="DressConfigCtrl" class="dress-config">
         <section id="silhouette-section">
-            <tahiti-radio-group id="silhouette-sizes"
+            <tahiti-radio-group id="silhouette-sizes-selection"
                                 class="silhouette-sizes-aside"
-                                caption-icon=""
                                 caption-title="Taille"
                                 items="lists.sizes"
-                                ng-model="sizeId"></tahiti-radio-group>
+                                ng-model="criteria.sizeId"></tahiti-radio-group>
             <div id="silhouette-main-content">
                 <tahiti-total-price id="silhouette-section-price"
                                     total="total"></tahiti-total-price>
                 <div id="silhouette-section-image-slider"></div>
             </div>
         </section>
-        <section id="dress-configuration-options"></section>
-        <section id="delivery-section"></section>
+        <section id="dress-configuration-options">
+            <tahiti-radio-group id="laces-selection"
+                                caption-title="Dentelle"
+                                items="lists.laces"
+                                ng-model="criteria.laceId"></tahiti-radio-group>
+            <tahiti-radio-group id="flower-selection"
+                                caption-title="Fleur"
+                                items="lists.flowers"
+                                ng-model="criteria.flowerId"></tahiti-radio-group>
+        </section>
+        <section id="delivery-section">
+            <tahiti-dropdown-select id="delivery-dropdown"
+                                    caption-title="Livraison"
+                                    items="lists.deliveries"
+                                    ng-model="criteria.deliveryId"></tahiti-dropdown-select>
+        </section>
     </article>
+
     <script id="/tahiti-radio-group.html" type="text/ng-template">
-        <h2>
+        <h2 class="dress-config__radio-group-caption">
             <img ng-if="captionIcon"
-                 ng-src="{{::captionIcon}}" alt="{{::captionTitle}}"/>
+                 ng-src="{{::captionIcon}}"
+                 class="dress-config__radio-group-caption-icon"
+                 alt="{{::captionTitle}}"/>
             <span ng-bind="::captionTitle"></span>
         </h2>
-        <ul>
-            <li ng-repeat="item in items track by $index">
+        <ul ng-class="
+            [
+                'dress-config__radio-group-layout--desktop-' + local.desktopLayout,
+                'dress-config__radio-group-layout--mobile-' + local.mobileLayout
+            ]">
+            <li ng-repeat="item in local.items track by $index">
                 <label for="{{id + '-' + item.id}}">
                     <input id="{{id + '-' + item.id}}"
                            ng-checked="item.id === local.selectedId"
@@ -51,6 +73,7 @@
             </li>
         </ul>
     </script>
+
     <script id="/tahiti-total-price.html" type="text/ng-template">
         <p class="dress-config__total-price">
             <span>Total&nbsp;&hyphen;</span>
@@ -58,6 +81,23 @@
             <span class="dress-config__total-price-currency" ng-bind="::total.currency"></span>
         </p>
     </script>
+
+    <script id="/tahiti-dropdown-select.html" type="text/ng-template">
+        <label for="{{id}}" class="dress-config__dropdown-select">
+            <img ng-if="captionIcon"
+                 ng-src="{{::captionIcon}}"
+                 class="dress-config__dropdown-select-caption-icon"
+                 alt="{{::captionTitle}}"/>
+            <span ng-bind="::captionTitle"></span>
+        </label>
+        <select id="{{id}}" ng-model="local.selectedId" ng-change="selectOption()">
+            <option ng-repeat="item in local.items track by $index"
+                    ng-selected="item.id === local.selectedId"
+                    ng-bind="::item.label"
+                    value="{{::item.id}}">
+        </select>
+    </script>
+
 </main>
 </body>
 </html>

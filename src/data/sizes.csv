@@ -1,0 +1,8 @@
+id;label;tissueFactor;laceworkFactor;flowerFactor;threadPrice;elasticPrice;nacrePrice;craftingPrice;cartonPrice
+1_small;S;2;3.0;0.4;180;200;500;4000;500
+2_medium;M;2;3.0;0.4;180;200;500;4000;500
+3_large;L;2;3.5;0.4;180;300;500;4000;500
+4_extra;XL;2;4.0;0.4;180;300;500;4000;500
+5_extra2;2XL;3;4.0;0.6;180;400;500;4000;500
+6_extra3;3XL;3;4.5;0.6;180;400;500;4000;500
+7_extra4;4XL;3;5.0;0.6;180;500;500;4000;500
