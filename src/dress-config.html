@@ -60,8 +60,8 @@
                 'dress-config__radio-group-layout--mobile-' + local.mobileLayout
             ]">
             <li ng-repeat="item in local.items track by $index">
-                <label for="{{id + '-' + item.id}}">
-                    <input id="{{id + '-' + item.id}}"
+                <label for="{{id + '-' + item.id}}-choice">
+                    <input id="{{id + '-' + item.id}}-choice"
                            ng-checked="item.id === local.selectedId"
                            ng-model="local.selectedId"
                            ng-change="handleChange(item.id)"
@@ -83,14 +83,14 @@
     </script>
 
     <script id="/tahiti-dropdown-select.html" type="text/ng-template">
-        <label for="{{id}}" class="dress-config__dropdown-select">
+        <label for="{{id}}-select" class="dress-config__dropdown-select">
             <img ng-if="captionIcon"
                  ng-src="{{::captionIcon}}"
                  class="dress-config__dropdown-select-caption-icon"
                  alt="{{::captionTitle}}"/>
             <span ng-bind="::captionTitle"></span>
         </label>
-        <select id="{{id}}" ng-model="local.selectedId" ng-change="selectOption()">
+        <select id="{{id}}-select" ng-model="local.selectedId" ng-change="selectOption()">
             <option ng-repeat="item in local.items track by $index"
                     ng-selected="item.id === local.selectedId"
                     ng-bind="::item.label"
