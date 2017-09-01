@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8"/>
     <title>Tahiti customize - Dress configuration</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
     <script type="text/javascript"
@@ -20,6 +21,7 @@
             <tahiti-radio-group id="silhouette-sizes-selection"
                                 class="silhouette-sizes-aside"
                                 caption-title="Taille"
+                                caption-icon="img/icon_size.png"
                                 items="lists.sizes"
                                 ng-model="criteria.sizeId"></tahiti-radio-group>
             <div id="silhouette-main-content">
@@ -29,18 +31,27 @@
             </div>
         </section>
         <section id="dress-configuration-options">
+            <tahiti-radio-group id="tissue-selection"
+                                caption-title="Tissu"
+                                caption-icon="img/icon_palette.png"
+                                tiles="true"
+                                items="lists.tissues"
+                                ng-model="criteria.tissueId"></tahiti-radio-group>
             <tahiti-radio-group id="laces-selection"
                                 caption-title="Dentelle"
+                                caption-icon="img/icon_laces.png"
                                 items="lists.laces"
                                 ng-model="criteria.laceId"></tahiti-radio-group>
             <tahiti-radio-group id="flower-selection"
                                 caption-title="Fleur"
+                                caption-icon="img/icon_flower.png"
                                 items="lists.flowers"
                                 ng-model="criteria.flowerId"></tahiti-radio-group>
         </section>
         <section id="delivery-section">
             <tahiti-dropdown-select id="delivery-dropdown"
                                     caption-title="Livraison"
+                                    caption-icon="img/icon_delivery.png"
                                     items="lists.deliveries"
                                     ng-model="criteria.deliveryId"></tahiti-dropdown-select>
         </section>
@@ -68,7 +79,11 @@
                            type="radio"
                            name="{{::id}}"
                            value="{{::item.id}}"/>
-                    <span ng-bind="::item.label"></span>
+                    <span class="radio-button__mark" ng-if="::(!local.tiles)"></span>
+                    <span class="radio-button__label" ng-if="::(!local.tiles)" ng-bind="::item.label"></span>
+                    <span class="radio-button__tile" ng-if="::local.tiles">
+                        <img ng-src="{{item.icon}}"/>
+                    </span>
                 </label>
             </li>
         </ul>

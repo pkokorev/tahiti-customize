@@ -1,7 +1,7 @@
 id;label;price;icon
-1_t;Tissu 1;100;thumb-tissue_1-cobalt.png
-2_t;Tissu 2;135;thumb-tissue_2-bayberry.png
-3_t;Tissu 3;145;thumb-tissue_3-green.png
-4_t;Tissu 4;175;thumb-tissue_4-wheat.png
-5_t;Tissu 5;180;thumb-tissue_5-orange.png
-6_t;Tissu 6;220;thumb-tissue_6-red.png
+1_t;Tissu 1;100;img/thumb-tissue_1-cobalt.png
+2_t;Tissu 2;135;img/thumb-tissue_2-bayberry.png
+3_t;Tissu 3;145;img/thumb-tissue_3-green.png
+4_t;Tissu 4;175;img/thumb-tissue_4-wheat.png
+5_t;Tissu 5;180;img/thumb-tissue_5-orange.png
+6_t;Tissu 6;220;img/thumb-tissue_6-red.png

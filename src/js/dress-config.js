@@ -94,6 +94,7 @@
                     captionIcon: '@?',
                     desktopLayout: '@?',
                     mobileLayout: '@?',
+                    tiles: '@?',
                     items: '=',
                     ngModel: '='
                 },
@@ -103,7 +104,8 @@
                         items: scope.items,
                         selectedId: scope.ngModel,
                         desktopLayout: scope.desktopLayout === 'horizontal' ? scope.desktopLayout : 'vertical',
-                        mobileLayout: scope.mobileLayout === 'horizontal' ? scope.mobileLayout : 'vertical'
+                        mobileLayout: scope.mobileLayout === 'horizontal' ? scope.mobileLayout : 'vertical',
+                        tiles: !!scope.tiles
                     };
                     scope.handleChange = function (selectedId) {
                         scope.local.selectedId = selectedId;
