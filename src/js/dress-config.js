@@ -104,7 +104,7 @@
                         items: scope.items,
                         selectedId: scope.ngModel,
                         desktopLayout: scope.desktopLayout === 'horizontal' ? scope.desktopLayout : 'vertical',
-                        mobileLayout: scope.mobileLayout === 'horizontal' ? scope.mobileLayout : 'vertical',
+                        mobileLayout: scope.mobileLayout === 'vertical' ? scope.mobileLayout : 'horizontal',
                         tiles: !!scope.tiles
                     };
                     scope.handleChange = function (selectedId) {

@@ -13,21 +13,27 @@
     <script type="text/javascript"
             src="js/dress-config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/dress-config.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tahiti-radio-group.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
+<header style="display: block; height: 88px; background: #961326; margin-bottom: 11px;"></header>
 <main ng-app="DressConfigApp">
     <article ng-controller="DressConfigCtrl" class="dress-config">
-        <section id="silhouette-section">
+        <section id="silhouette-section" class="clear-fix">
             <tahiti-radio-group id="silhouette-sizes-selection"
                                 class="silhouette-sizes-aside"
                                 caption-title="Taille"
                                 caption-icon="img/icon_size.png"
+                                mobile-layout="vertical"
                                 items="lists.sizes"
                                 ng-model="criteria.sizeId"></tahiti-radio-group>
-            <div id="silhouette-main-content">
+            <div class="silhouette-main-content">
                 <tahiti-total-price id="silhouette-section-price"
                                     total="total"></tahiti-total-price>
-                <div id="silhouette-section-image-slider"></div>
+                <div id="silhouette-section-image-slider">
+                    <div class="tahiti-dress-slider"></div>
+                </div>
             </div>
         </section>
         <section id="dress-configuration-options">
@@ -58,31 +64,35 @@
     </article>
 
     <script id="/tahiti-radio-group.html" type="text/ng-template">
-        <h2 class="dress-config__radio-group-caption">
+        <h2 class="tahiti-radio-group__caption">
             <img ng-if="captionIcon"
                  ng-src="{{::captionIcon}}"
-                 class="dress-config__radio-group-caption-icon"
+                 class="tahiti-radio-group__caption-icon"
                  alt="{{::captionTitle}}"/>
-            <span ng-bind="::captionTitle"></span>
+            <span class="tahiti-radio-group__caption-text" ng-bind="::captionTitle"></span>
         </h2>
-        <ul ng-class="
+        <ul class="tahiti-radio-group__layout clear-fix"
+            ng-class="
             [
-                'dress-config__radio-group-layout--desktop-' + local.desktopLayout,
-                'dress-config__radio-group-layout--mobile-' + local.mobileLayout
+                'tahiti-radio-group__layout--desktop-' + local.desktopLayout,
+                'tahiti-radio-group__layout--mobile-' + local.mobileLayout
             ]">
-            <li ng-repeat="item in local.items track by $index">
-                <label for="{{id + '-' + item.id}}-choice">
+            <li ng-repeat="item in local.items track by $index"
+                class="tahiti-radio-button__line">
+                <label for="{{id + '-' + item.id}}-choice" class="tahiti-radio-button__label clear-fix">
                     <input id="{{id + '-' + item.id}}-choice"
                            ng-checked="item.id === local.selectedId"
                            ng-model="local.selectedId"
+                           ng-class="{'tahiti-radio-button__input--hidden': local.tiles}"
                            ng-change="handleChange(item.id)"
                            type="radio"
+                           class="tahiti-radio-button__input"
                            name="{{::id}}"
                            value="{{::item.id}}"/>
-                    <span class="radio-button__mark" ng-if="::(!local.tiles)"></span>
-                    <span class="radio-button__label" ng-if="::(!local.tiles)" ng-bind="::item.label"></span>
-                    <span class="radio-button__tile" ng-if="::local.tiles">
-                        <img ng-src="{{item.icon}}"/>
+                    <span class="tahiti-radio-button__mark" ng-if="::(!local.tiles)"></span>
+                    <span class="tahiti-radio-button__text" ng-if="::(!local.tiles)" ng-bind="::item.label"></span>
+                    <span class="tahiti-radio-button__tile" ng-if="::local.tiles">
+                        <img class="tahiti-radio-button__image" ng-src="{{item.icon}}"/>
                     </span>
                 </label>
             </li>
@@ -90,10 +100,10 @@
     </script>
 
     <script id="/tahiti-total-price.html" type="text/ng-template">
-        <p class="dress-config__total-price">
+        <p class="tahiti-total-price__paragraph">
             <span>Total&nbsp;&hyphen;</span>
-            <span class="dress-config__total-price-amount" ng-bind="total.amount"></span>
-            <span class="dress-config__total-price-currency" ng-bind="::total.currency"></span>
+            <span class="tahiti-total-price__amount" ng-bind="total.amount"></span>
+            <span class="tahiti-total-price__currency" ng-bind="::total.currency"></span>
         </p>
     </script>
 
@@ -114,5 +124,6 @@
     </script>
 
 </main>
+<footer style="display: block; height: 88px; background: black; margin-top: 11px;"></footer>
 </body>
 </html>

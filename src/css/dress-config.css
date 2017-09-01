@@ -1,24 +1,101 @@
-.dress-config,
-.dress-config * {
-    box-sizing: border-box;
-}
-
-.dress-config h1,
-.dress-config h2,
-.dress-config p {
+html,
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
     margin: 0;
     padding: 0;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
     font-weight: normal;
     text-decoration: none;
 }
 
-.dress-config ul {
+ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+.clear-fix:after {
+    clear: both;
+}
+
+.clear-fix:before,
+.clear-fix:after {
+    content: " ";
+    display: table;
+    visibility: hidden;
+}
+
+.dress-config,
+.dress-config * {
+    box-sizing: border-box;
+}
+
 tahiti-radio-group,
+tahiti-dropdown-select,
 tahiti-total-price {
     display: block;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .silhouette-sizes-aside {
+        width: 120px;
+        float: right;
+    }
+
+    .silhouette-main-content {
+        width: auto;
+        float: none;
+        margin-right: 120px;
+    }
+
+    .tahiti-radio-group__layout--mobile-vertical .tahiti-radio-button__line {
+        width: 100%;
+    }
+
+    .tahiti-radio-group__layout--mobile-horizontal .tahiti-radio-button__line {
+        width: 33%;
+        float: left;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+
+    .tahiti-radio-group__layout--desktop-vertical .tahiti-radio-button__line {
+        width: 100%;
+        clear: left;
+    }
+
+    .tahiti-radio-group__layout--desktop-horizontal .tahiti-radio-button__line {
+        width: 33%;
+        float: left;
+    }
+
+}
+
+.silhouette-main-content {
+    padding: 0 11px;
+}
+
+.tahiti-dress-slider {
+    display: block;
+    margin: 0 auto;
+    width: 125px;
+    height: 250px;
+    background: #fafafa;
+}
+
+.tahiti-total-price__paragraph {
+    line-height: 44px;
+    font-weight: bolder;
+    font-size: 1.25rem;
 }
