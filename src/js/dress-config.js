@@ -32,6 +32,7 @@
 
     ng.module('DressConfigApp', ['ngAnimate'])
         .factory('$dataFactory', ['$timeout', function (timeout) {
+            var db = {};
             return {
                 loadData: function (name, callback) {
                     papa.parse('data/' + name + '.csv', {
@@ -39,17 +40,19 @@
                         header: true,
                         dynamicTyping: true,
                         complete: function (results) {
+                            db[name] = mapById(results.data, 'id');
                             timeout(function () {
                                 callback(results);
                             });
                         }
                     });
+                },
+                db: function () {
+                    return db;
                 }
             };
         }])
         .controller('DressConfigCtrl', ['$scope', '$dataFactory', function (scope, dataFactory) {
-            var db = {};
-
             scope.criteria = {
                 sizeId: '2_medium',
                 tissueId: '3_t',
@@ -68,6 +71,7 @@
                 flowers: [],
                 deliveries: []
             };
+            scope.dressImages = [];
             scope.description =
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis leo feugiat sem porta ' +
                 'malesuada non sed urna. Phasellus sapien libero, varius vestibulum libero id, condimentum ' +
@@ -76,28 +80,16 @@
             (function (dataLists, loadedLists) {
                 dataLists.forEach(function (dataList) {
                     dataFactory.loadData(dataList, function (results) {
-                        db[dataList] = mapById(results.data, 'id');
                         copyArray(results.data, scope.lists[dataList]);
                         loadedLists.push(dataList);
                         if (dataLists.length === loadedLists.length) {
                             scope.$watch('criteria', function (value) {
-                                scope.total.amount = calculateTotalPrice(db, value || {});
+                                scope.total.amount = calculateTotalPrice(dataFactory.db(), value || {});
                             }, true);
                         }
                     });
                 });
             })(['sizes', 'tissues', 'laces', 'flowers', 'deliveries'], []);
-        }])
-        .directive('highlighter', ['$timeout', function ($timeout) {
-            return {
-                restrict: 'A',
-                require: 'ngModel',
-                scope: {
-                    ngModel: '='
-                },
-                link: function (scope, element) {
-                }
-            };
         }])
         .directive('tahitiCaption', [function () {
             return {
@@ -148,7 +140,7 @@
                 templateUrl: '/tahiti-total-price.html',
                 link: function (scope, element) {
                     scope.$watch('total', function (newVal, oldVal) {
-                        if (newVal !== oldVal) {
+                        if (newVal.amount && oldVal.amount && newVal.amount !== oldVal.amount) {
                             animate.addClass(element, 'tahiti-total-price--highlighted').then(function () {
                                 timeout(function () {
                                     animate.removeClass(element, 'tahiti-total-price--highlighted');
@@ -184,6 +176,41 @@
                     scope.selectOption = function () {
                         ngModel.$setViewValue(scope.local.selectedId);
                     }
+                }
+            };
+        }])
+        .directive('tahitiDressSlider', [function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    criteria: '=',
+                    initialVariant: '@',
+                    tissues: '='
+                },
+                templateUrl: '/tahiti-dress-slider.html',
+                link: function (scope) {
+
+                    function calculateShape(sizeId) {
+                        if (['1_small', '2_medium'].indexOf(sizeId) >= 0) {
+                            return 'skinny';
+                        } else {
+                            return 'round';
+                        }
+                    }
+
+                    var shape = calculateShape(scope.criteria.sizeId),
+                        variant = scope.initialVariant;
+
+                    scope.getShape = function () {
+                        return shape;
+                    };
+                    scope.getVariant = function () {
+                        return variant;
+                    };
+
+                    scope.$watch('criteria', function (criteria) {
+                        shape = calculateShape(criteria.sizeId);
+                    }, true);
                 }
             };
         }]);

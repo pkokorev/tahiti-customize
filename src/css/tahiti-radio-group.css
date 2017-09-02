@@ -95,7 +95,7 @@ tahiti-radio-group {
     }
 
     .tahiti-radio-group__layout--mobile-horizontal .tahiti-radio-button__line {
-        width: 33%;
+        width: 33.333%;
         float: left;
     }
 

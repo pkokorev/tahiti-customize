@@ -1,0 +1,55 @@
+tahiti-dress-slider {
+    display: block;
+}
+
+.tahiti-dress-slider__canvas {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tahiti-dress-slider__body,
+.tahiti-dress-slider__canvas,
+.tahiti-dress-slider__dress-image,
+.tahiti-dress-slider__dress-container {
+    width: 125px;
+    height: 250px;
+}
+
+.tahiti-dress-slider__body {
+    background-size: cover;
+}
+
+.tahiti-dress-slider__dress-container,
+.tahiti-dress-slider__dress-image,
+.tahiti-dress-slider__body {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.tahiti-dress-slider__dress-image {
+    border: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.tahiti-dress-slider__dress-image.ng-hide {
+    opacity: 0;
+}
+
+.tahiti-dress-slider__body-skinny--front {
+    background-image: url("../img/model_skinny--front.png");
+}
+
+.tahiti-dress-slider__body-skinny--back {
+    background-image: url("../img/model_skinny--back.png");
+}
+
+.tahiti-dress-slider__body-round--front {
+    background-image: url("../img/model_round--front.png");
+}
+
+.tahiti-dress-slider__body-round--back {
+    background-image: url("../img/model_round--back.png");
+}

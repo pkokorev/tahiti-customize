@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/tahiti-total-price.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-radio-group.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-dropdown-select.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tahiti-dress-slider.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
@@ -35,7 +36,9 @@
                 <tahiti-total-price id="silhouette-section-price"
                                     total="total"></tahiti-total-price>
                 <div id="silhouette-section-image-slider">
-                    <div class="tahiti-dress-slider"></div>
+                    <tahiti-dress-slider criteria="criteria"
+                                         initial-variant="front"
+                                         tissues="lists.tissues"></tahiti-dress-slider>
                 </div>
             </div>
         </section>
@@ -87,11 +90,7 @@
     <script id="/tahiti-radio-group.html" type="text/ng-template">
         <tahiti-caption caption-title="{{captionTitle}}" caption-icon="{{captionIcon}}"></tahiti-caption>
         <ul class="tahiti-radio-group__layout clear-fix"
-            ng-class="
-            [
-                'tahiti-radio-group__layout--desktop-' + local.desktopLayout,
-                'tahiti-radio-group__layout--mobile-' + local.mobileLayout
-            ]">
+            ng-class="['tahiti-radio-group__layout--desktop-' + local.desktopLayout, 'tahiti-radio-group__layout--mobile-' + local.mobileLayout]">
             <li ng-repeat="item in local.items track by $index"
                 class="tahiti-radio-button__line">
                 <label for="{{id + '-' + item.id}}-choice" class="tahiti-radio-button__label clear-fix">
@@ -116,9 +115,10 @@
 
     <script id="/tahiti-total-price.html" type="text/ng-template">
         <p class="tahiti-total-price__paragraph">
-            <span>Total&nbsp;:</span>
-            <span class="tahiti-total-price__amount" ng-bind="total.amount | number:2"></span>
-            <span class="tahiti-total-price__currency" ng-bind="::total.currency"></span>
+            <span>Total</span>
+            <span class="tahiti-total-price__amount"
+                  ng-bind="total.amount | number:2"></span><span class="tahiti-total-price__currency"
+                                                                 ng-bind="::total.currency"></span>
         </p>
     </script>
 
@@ -137,6 +137,19 @@
                             value="{{::item.id}}">
                 </select>
             </label>
+        </div>
+    </script>
+
+    <script id="/tahiti-dress-slider.html" type="text/ng-template">
+        <div class="tahiti-dress-slider__canvas">
+            <div class="tahiti-dress-slider__dress-container">
+                <img ng-repeat="tissue in tissues"
+                     ng-src="{{tissue.canvas}}"
+                     ng-show="tissue.id === criteria.tissueId"
+                     class="tahiti-dress-slider__dress-image"/>
+            </div>
+            <div class="tahiti-dress-slider__body"
+                 ng-class="'tahiti-dress-slider__body-' + getShape() + '--' + getVariant()"></div>
         </div>
     </script>
 
