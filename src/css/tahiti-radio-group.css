@@ -73,8 +73,8 @@ tahiti-radio-group {
     display: block;
     width: 84px;
     height: 84px;
-    padding: 2px;
-    border: 2px solid transparent;
+    padding: 3px;
+    border: 1px solid #cccccc;
 }
 
 .tahiti-radio-button__image {
@@ -84,6 +84,7 @@ tahiti-radio-group {
 }
 
 .tahiti-radio-button__input:checked + .tahiti-radio-button__tile {
+    padding: 2px;
     border: 2px solid #961326;
 }
 
