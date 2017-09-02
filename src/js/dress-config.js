@@ -68,6 +68,10 @@
                 flowers: [],
                 deliveries: []
             };
+            scope.description =
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis leo feugiat sem porta ' +
+                'malesuada non sed urna. Phasellus sapien libero, varius vestibulum libero id, condimentum ' +
+                'pellentesque felis. Nullam lobortis urna augue, eu fringilla erat efficitur ultrices.';
 
             (function (dataLists, loadedLists) {
                 dataLists.forEach(function (dataList) {
@@ -83,6 +87,16 @@
                     });
                 });
             })(['sizes', 'tissues', 'laces', 'flowers', 'deliveries'], []);
+        }])
+        .directive('tahitiCaption', [function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    captionTitle: '@',
+                    captionIcon: '@?'
+                },
+                templateUrl: '/tahiti-caption.html'
+            };
         }])
         .directive('tahitiRadioGroup', [function () {
             return {
@@ -138,7 +152,12 @@
                 link: function (scope, element, attrs, ngModel) {
                     scope.local = {
                         items: scope.items,
-                        selectedId: scope.ngModel
+                        selectedId: scope.ngModel,
+                        selectedLabel: function () {
+                            var localItemsMap = mapById(scope.local.items, 'id') || {};
+                            var selectedItem = localItemsMap[scope.local.selectedId] || {};
+                            return selectedItem.label || '';
+                        }
                     };
                     scope.selectOption = function () {
                         ngModel.$setViewValue(scope.local.selectedId);

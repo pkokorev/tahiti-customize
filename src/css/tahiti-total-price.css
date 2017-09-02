@@ -1,0 +1,22 @@
+tahiti-total-price {
+    display: block;
+}
+
+.tahiti-total-price--standalone {
+    padding: 11px;
+}
+
+.tahiti-total-price__paragraph {
+    line-height: 44px;
+    font-weight: bolder;
+    font-size: 1.25rem;
+}
+
+.tahiti-total-price__amount {
+    font-weight: bold;
+    color: #961326;
+}
+
+.tahiti-total-price__currency {
+    font-weight: lighter;
+}

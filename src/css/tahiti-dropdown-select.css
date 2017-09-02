@@ -1,0 +1,45 @@
+tahiti-dropdown-select {
+    display: block;
+    margin-bottom: 22px;
+}
+
+.tahiti-dropdown-select__content {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 33px;
+    padding: 0 11px;
+}
+
+.tahiti-dropdown-select__cover {
+    display: block;
+    position: relative;
+    width: 200px;
+    height: 33px;
+    line-height: 31px;
+    padding: 0 11px;
+    border: 1px solid black;
+}
+
+.tahiti-dropdown-select__cover:after {
+    display: block;
+    content: '▼';
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 31px;
+    height: 31px;
+    background: #961326;
+    color: white;
+}
+
+.tahiti-dropdown-select__control {
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 33px;
+    left: 11px;
+    top: 0;
+    opacity: 0;
+}

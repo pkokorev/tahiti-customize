@@ -1,29 +1,10 @@
-tahiti-radio-group,
-tahiti-dropdown-select,
-tahiti-total-price {
+tahiti-radio-group {
     display: block;
-}
-
-.tahiti-radio-group__caption {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 11px;
-}
-
-.tahiti-radio-group__caption-icon {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-}
-
-.tahiti-radio-group__caption-text {
-    vertical-align: top;
-    line-height: 44px;
+    margin-bottom: 22px;
 }
 
 .tahiti-radio-group__layout {
     padding-left: 11px;
-    margin-bottom: 22px;
 }
 
 .tahiti-radio-button__line {

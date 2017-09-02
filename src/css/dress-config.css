@@ -38,13 +38,11 @@ ul {
     box-sizing: border-box;
 }
 
-tahiti-radio-group,
-tahiti-dropdown-select,
-tahiti-total-price {
-    display: block;
-}
-
 @media only screen and (max-width: 767px) {
+
+    #silhouette-section-price-bottom {
+        display: block;
+    }
 
     .silhouette-sizes-aside {
         width: 120px;
@@ -57,33 +55,54 @@ tahiti-total-price {
         margin-right: 120px;
     }
 
-    .tahiti-radio-group__layout--mobile-vertical .tahiti-radio-button__line {
-        width: 100%;
-    }
-
-    .tahiti-radio-group__layout--mobile-horizontal .tahiti-radio-button__line {
-        width: 33%;
-        float: left;
-    }
-
 }
 
 @media only screen and (min-width: 768px) {
 
-    .tahiti-radio-group__layout--desktop-vertical .tahiti-radio-button__line {
-        width: 100%;
-        clear: left;
-    }
-
-    .tahiti-radio-group__layout--desktop-horizontal .tahiti-radio-button__line {
-        width: 33%;
+    #silhouette-section {
         float: left;
     }
 
+    #dress-configuration-options {
+        float: right;
+    }
+
+    #silhouette-sizes-selection,
+    #silhouette-main-content {
+        float: left;
+    }
+
+    #tissue-selection,
+    #laces-selection,
+    #flower-selection {
+        float: left;
+    }
+
+    #delivery-section {
+        clear: both;
+    }
+
+    #delivery-dropdown,
+    #dress-description {
+        float: left;
+    }
+
+    #silhouette-section-price-bottom {
+        display: none;
+    }
 }
 
 .silhouette-main-content {
     padding: 0 11px;
+}
+
+.dress-config__description {
+    max-width: 500px;
+}
+
+.dress-config__description-text {
+    padding: 0 11px;
+    font-weight: lighter;
 }
 
 .tahiti-dress-slider {
@@ -92,10 +111,4 @@ tahiti-total-price {
     width: 125px;
     height: 250px;
     background: #fafafa;
-}
-
-.tahiti-total-price__paragraph {
-    line-height: 44px;
-    font-weight: bolder;
-    font-size: 1.25rem;
 }
