@@ -22,6 +22,10 @@ ul {
     margin: 0;
 }
 
+main {
+    padding: 11px;
+}
+
 .clear-fix:after {
     clear: both;
 }

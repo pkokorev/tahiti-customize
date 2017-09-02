@@ -88,6 +88,17 @@
                 });
             })(['sizes', 'tissues', 'laces', 'flowers', 'deliveries'], []);
         }])
+        .directive('highlighter', ['$timeout', function ($timeout) {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                scope: {
+                    ngModel: '='
+                },
+                link: function (scope, element) {
+                }
+            };
+        }])
         .directive('tahitiCaption', [function () {
             return {
                 restrict: 'E',
@@ -128,13 +139,24 @@
                 }
             };
         }])
-        .directive('tahitiTotalPrice', [function () {
+        .directive('tahitiTotalPrice', ['$timeout', '$animate', function (timeout, animate) {
             return {
                 restrict: 'E',
                 scope: {
                     total: '='
                 },
-                templateUrl: '/tahiti-total-price.html'
+                templateUrl: '/tahiti-total-price.html',
+                link: function (scope, element) {
+                    scope.$watch('total', function (newVal, oldVal) {
+                        if (newVal !== oldVal) {
+                            animate.addClass(element, 'tahiti-total-price--highlighted').then(function () {
+                                timeout(function () {
+                                    animate.removeClass(element, 'tahiti-total-price--highlighted');
+                                }, 250);
+                            });
+                        }
+                    }, true);
+                }
             };
         }])
         .directive('tahitiDropdownSelect', [function () {

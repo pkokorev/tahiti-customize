@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
-<header style="display: block; height: 88px; background: #961326; margin-bottom: 11px;"></header>
+<header style="display: block; height: 88px; background: #961326;"></header>
 <main ng-app="DressConfigApp">
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
@@ -117,28 +117,30 @@
     <script id="/tahiti-total-price.html" type="text/ng-template">
         <p class="tahiti-total-price__paragraph">
             <span>Total&nbsp;:</span>
-            <span class="tahiti-total-price__amount" ng-bind="total.amount"></span>
+            <span class="tahiti-total-price__amount" ng-bind="total.amount | number:2"></span>
             <span class="tahiti-total-price__currency" ng-bind="::total.currency"></span>
         </p>
     </script>
 
     <script id="/tahiti-dropdown-select.html" type="text/ng-template">
         <tahiti-caption caption-title="{{captionTitle}}" caption-icon="{{captionIcon}}"></tahiti-caption>
-        <label for="{{id}}-select" class="tahiti-dropdown-select__content">
-            <span ng-bind="local.selectedLabel()" class="tahiti-dropdown-select__cover"></span>
-            <select id="{{id}}-select"
-                    class="tahiti-dropdown-select__control"
-                    ng-model="local.selectedId"
-                    ng-change="selectOption()">
-                <option ng-repeat="item in local.items track by $index"
-                        ng-selected="item.id === local.selectedId"
-                        ng-bind="::item.label"
-                        value="{{::item.id}}">
-            </select>
-        </label>
+        <div class="tahiti-dropdown-select__container">
+            <label for="{{id}}-select" class="tahiti-dropdown-select__content">
+                <span ng-bind="local.selectedLabel()" class="tahiti-dropdown-select__cover"></span>
+                <select id="{{id}}-select"
+                        class="tahiti-dropdown-select__control"
+                        ng-model="local.selectedId"
+                        ng-change="selectOption()">
+                    <option ng-repeat="item in local.items track by $index"
+                            ng-selected="item.id === local.selectedId"
+                            ng-bind="::item.label"
+                            value="{{::item.id}}">
+                </select>
+            </label>
+        </div>
     </script>
 
 </main>
-<footer style="display: block; height: 88px; background: black; margin-top: 11px;"></footer>
+<footer style="display: block; height: 88px; background: black;"></footer>
 </body>
 </html>
