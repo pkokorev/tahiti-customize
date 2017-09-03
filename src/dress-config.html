@@ -23,6 +23,13 @@
 <body>
 <header style="display: block; height: 88px; background: #961326;"></header>
 <main ng-app="DressConfigApp">
+
+    <initial-loader class="tenant-loader"
+        data-preload-img-01="img/model_round--back.png"
+        data-preload-img-02="img/model_round--front.png"
+        data-preload-img-03="img/model_skinny--back.png"
+        data-preload-img-04="img/model_skinny--front.png"></initial-loader>
+
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
             <tahiti-radio-group id="silhouette-sizes-selection"
@@ -34,6 +41,7 @@
                                 ng-model="criteria.sizeId"></tahiti-radio-group>
             <div id="silhouette-main-content" class="silhouette-main-content">
                 <tahiti-total-price id="silhouette-section-price"
+                                    class="tahiti-total-price--integrated"
                                     total="total"></tahiti-total-price>
                 <div id="silhouette-section-image-slider">
                     <tahiti-dress-slider criteria="criteria"
@@ -146,11 +154,17 @@
                 <img ng-repeat="tissue in tissues"
                      ng-src="{{tissue.canvas}}"
                      ng-show="tissue.id === criteria.tissueId"
+                     ng-class="'tahiti-dress-slider__dress-image--' + getVariant()"
                      class="tahiti-dress-slider__dress-image"/>
             </div>
             <div class="tahiti-dress-slider__body"
                  ng-class="'tahiti-dress-slider__body-' + getShape() + '--' + getVariant()"></div>
         </div>
+        <button class="tahiti-dress-slider__rotate"
+                type="button"
+                ng-click="rotate()">
+            <img class="tahiti-dress-slider__rotate_icon" src="img/icon_rotate.png"/>
+        </button>
     </script>
 
 </main>

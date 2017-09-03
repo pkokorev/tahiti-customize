@@ -6,6 +6,10 @@ tahiti-total-price {
     background-color: lightskyblue;
 }
 
+.tahiti-total-price--integrated {
+    padding: 0 11px;
+}
+
 .tahiti-total-price--standalone {
     padding: 11px;
 }

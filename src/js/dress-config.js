@@ -207,10 +207,34 @@
                     scope.getVariant = function () {
                         return variant;
                     };
+                    scope.rotate = function () {
+                        variant = variant === 'front' ? 'back' : 'front';
+                    };
 
                     scope.$watch('criteria', function (criteria) {
                         shape = calculateShape(criteria.sizeId);
                     }, true);
+                }
+            };
+        }])
+        .directive('initialLoader', [function () {
+            return {
+                restrict: 'E',
+                scope: {},
+                link: function (scope, element, attrs) {
+                    ng.forEach(attrs, function (value, key) {
+                        if (key.indexOf('preloadImg') >= 0) {
+                            var newImage = new Image();
+
+                            newImage.onload = handle;
+                            newImage.onerror = handle;
+                            newImage.src = value;
+                        }
+                    });
+
+                    function handle() {
+                        event.target.remove();
+                    }
                 }
             };
         }]);

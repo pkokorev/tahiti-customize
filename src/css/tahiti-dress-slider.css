@@ -1,5 +1,6 @@
 tahiti-dress-slider {
     display: block;
+    position: relative;
 }
 
 .tahiti-dress-slider__canvas {
@@ -38,6 +39,11 @@ tahiti-dress-slider {
     opacity: 0;
 }
 
+.tahiti-dress-slider__dress-image--back {
+    transform: scaleX(-1);
+    filter: 'FlipH';
+}
+
 .tahiti-dress-slider__body-skinny--front {
     background-image: url("../img/model_skinny--front.png");
 }
@@ -52,4 +58,18 @@ tahiti-dress-slider {
 
 .tahiti-dress-slider__body-round--back {
     background-image: url("../img/model_round--back.png");
+}
+
+.tahiti-dress-slider__rotate {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.tahiti-dress-slider__rotate_icon {
+    width: 44px;
+    height: 44px;
 }
