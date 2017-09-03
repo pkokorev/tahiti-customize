@@ -36,10 +36,6 @@ button {
     margin: 0;
 }
 
-main {
-    padding: 11px;
-}
-
 .clear-fix:after {
     clear: both;
 }
@@ -51,71 +47,17 @@ main {
     visibility: hidden;
 }
 
+.dress-config__container {
+    padding: 11px;
+}
+
 .dress-config,
 .dress-config * {
     box-sizing: border-box;
 }
 
-@media only screen and (max-width: 767px) {
-
-    #silhouette-section-price-bottom {
-        display: block;
-    }
-
-    .silhouette-sizes-aside {
-        width: 110px;
-        float: right;
-    }
-
-    .silhouette-main-content {
-        width: auto;
-        float: none;
-        margin-right: 110px;
-    }
-
-    .silhouette-main-content {
-        /*padding: 0 0 0 11px;*/
-    }
-}
-
-@media only screen and (min-width: 768px) {
-
-    #silhouette-section {
-        float: left;
-    }
-
-    #dress-configuration-options {
-        float: right;
-    }
-
-    #silhouette-sizes-selection,
-    #silhouette-main-content {
-        float: left;
-    }
-
-    #tissue-selection,
-    #laces-selection,
-    #flower-selection {
-        float: left;
-    }
-
-    #delivery-section {
-        clear: left;
-    }
-
-    #delivery-dropdown,
-    #crafted-dropdown,
-    #dress-description {
-        float: left;
-    }
-
-    #silhouette-section-price-bottom {
-        display: none;
-    }
-}
-
 .dress-config__description {
-    max-width: 500px;
+    max-width: 638px;
 }
 
 .dress-config__description-text {
@@ -129,4 +71,71 @@ main {
     width: 125px;
     height: 250px;
     background: #fafafa;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .silhouette-sizes-aside {
+        width: 110px;
+        float: right;
+    }
+
+    .silhouette-main-content {
+        width: auto;
+        float: none;
+        margin-right: 110px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    .dress-config {
+        max-width: 1002px;
+        margin: 0 auto;
+    }
+
+    #silhouette-section,
+    #dress-configuration-options-section,
+    #delivery-section {
+        float: left;
+        margin-bottom: 22px;
+    }
+
+    #silhouette-sizes-selection {
+        float: left;
+    }
+
+    #silhouette-main-content {
+        float: none;
+    }
+
+    #tissue-selection,
+    #laces-selection,
+    #flower-selection {
+        float: left;
+        margin-right: 22px;
+    }
+
+    #delivery-dropdown,
+    #crafted-dropdown,
+    #dress-description {
+        float: left;
+    }
+
+    #total-price-bottom {
+        display: none;
+    }
+
+    .silhouette-sizes-aside {
+        width: 125px;
+        float: left;
+    }
+
+    .silhouette-main-content {
+        width: auto;
+        float: none;
+        margin-left: 125px;
+        margin-right: 39px;
+    }
+
 }

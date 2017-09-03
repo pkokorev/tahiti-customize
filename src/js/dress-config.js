@@ -181,6 +181,7 @@
                     id: '@',
                     captionTitle: '@',
                     captionIcon: '@?',
+                    large: '@',
                     items: '=',
                     ngModel: '='
                 },

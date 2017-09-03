@@ -6,10 +6,6 @@ tahiti-total-price {
     background-color: lightskyblue;
 }
 
-.tahiti-total-price--integrated {
-    padding: 0 0 0 11px;
-}
-
 .tahiti-total-price--standalone {
     padding: 11px;
 }
@@ -30,4 +26,20 @@ tahiti-total-price {
 
 .tahiti-total-price__currency {
     font-weight: lighter;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .tahiti-total-price--integrated {
+        padding: 0 0 0 11px;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+
+    .tahiti-total-price--integrated {
+        text-align: center;
+    }
+
 }

@@ -22,7 +22,7 @@
 </head>
 <body>
 <header style="display: block; height: 88px; background: #961326;"></header>
-<main ng-app="DressConfigApp">
+<main ng-app="DressConfigApp" class="dress-config__container">
 
     <initial-loader class="tenant-loader"
                     data-preload-img-01="img/model_round--back.png"
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </section>
-        <section id="dress-configuration-options" class="clear-fix">
+        <section id="dress-configuration-options-section" class="clear-fix">
             <tahiti-radio-group id="tissue-selection"
                                 caption-title="Tissu"
                                 caption-icon="img/icon_palette.png"
@@ -72,6 +72,7 @@
             <tahiti-dropdown-select id="delivery-dropdown"
                                     caption-title="Livraison"
                                     caption-icon="img/icon_delivery.png"
+                                    large="true"
                                     items="lists.deliveries"
                                     ng-model="criteria.deliveryId"></tahiti-dropdown-select>
             <tahiti-dropdown-select id="crafted-dropdown"
@@ -79,12 +80,12 @@
                                     caption-icon="img/icon_sewn.png"
                                     items="[{id: 'true', label: 'Oui'}, {id: 'false', label: 'Non'}]"
                                     ng-model="criteria.crafted"></tahiti-dropdown-select>
-            <article id="dress-description" class="dress-config__description">
+            <div id="dress-description" class="dress-config__description">
                 <tahiti-caption caption-title="Description"
                                 caption-icon="img/icon_description.png"></tahiti-caption>
                 <p class="dress-config__description-text" ng-bind="::description"></p>
-            </article>
-            <tahiti-total-price id="silhouette-section-price-bottom"
+            </div>
+            <tahiti-total-price id="total-price-bottom"
                                 class="tahiti-total-price--standalone"
                                 total="total"></tahiti-total-price>
         </section>
@@ -103,7 +104,11 @@
     <script id="/tahiti-radio-group.html" type="text/ng-template">
         <tahiti-caption caption-title="{{captionTitle}}" caption-icon="{{captionIcon}}"></tahiti-caption>
         <ul class="tahiti-radio-group__layout clear-fix"
-            ng-class="['tahiti-radio-group__layout--desktop-' + local.desktopLayout, 'tahiti-radio-group__layout--mobile-' + local.mobileLayout]">
+            ng-class="[
+                'tahiti-radio-group__layout--desktop-' + local.desktopLayout,
+                'tahiti-radio-group__layout--mobile-' + local.mobileLayout,
+                'tahiti-radio-group__layout--' + (local.tiles ? 'tiled' : 'text')
+            ]">
             <li ng-repeat="item in local.items track by $index"
                 class="tahiti-radio-button__line">
                 <label for="{{id + '-' + item.id}}-choice" class="tahiti-radio-button__label clear-fix">
@@ -139,9 +144,12 @@
         <tahiti-caption caption-title="{{captionTitle}}" caption-icon="{{captionIcon}}"></tahiti-caption>
         <div class="tahiti-dropdown-select__container">
             <label for="{{id}}-select" class="tahiti-dropdown-select__content">
-                <span ng-bind="local.selectedLabel()" class="tahiti-dropdown-select__cover"></span>
+                <span ng-bind="local.selectedLabel()"
+                      class="tahiti-dropdown-select__cover"
+                      ng-class="{'tahiti-dropdown-select__cover--large' : large}"></span>
                 <select id="{{id}}-select"
                         class="tahiti-dropdown-select__control"
+                        ng-class="{'tahiti-dropdown-select__control--large': large}"
                         ng-model="local.selectedId"
                         ng-change="selectOption()">
                     <option ng-repeat="item in local.items track by $index"

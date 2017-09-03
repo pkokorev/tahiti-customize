@@ -3,7 +3,7 @@ tahiti-radio-group {
     margin-bottom: 22px;
 }
 
-.tahiti-radio-group__layout {
+.tahiti-radio-group__layout--text {
     padding-left: 11px;
 }
 
@@ -71,15 +71,16 @@ tahiti-radio-group {
 
 .tahiti-radio-button__tile {
     display: block;
-    width: 84px;
-    height: 84px;
+    width: 46px;
+    height: 46px;
     padding: 3px;
     border: 1px solid #cccccc;
+    cursor: pointer;
 }
 
 .tahiti-radio-button__image {
-    width: 76px;
-    height: 76px;
+    width: 38px;
+    height: 38px;
     display: block;
 }
 
@@ -95,7 +96,7 @@ tahiti-radio-group {
     }
 
     .tahiti-radio-group__layout--mobile-horizontal .tahiti-radio-button__line {
-        width: 33.333%;
+        width: 16.666%;
         float: left;
     }
 
@@ -119,8 +120,12 @@ tahiti-radio-group {
         width: 100%;
     }
 
+    .tahiti-radio-group__layout--desktop-vertical.tahiti-radio-group__layout--text .tahiti-radio-button__line {
+        padding-top: 11px;
+    }
+
     .tahiti-radio-group__layout--desktop-horizontal .tahiti-radio-button__line {
-        width: 16.667%;
+        width: 16.666%;
         float: left;
     }
 

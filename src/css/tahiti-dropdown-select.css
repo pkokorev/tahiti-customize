@@ -1,6 +1,7 @@
 tahiti-dropdown-select {
     display: block;
     margin-bottom: 22px;
+    margin-right: 11px;
 }
 
 .tahiti-dropdown-select__container {
@@ -18,8 +19,7 @@ tahiti-dropdown-select {
 .tahiti-dropdown-select__cover {
     display: block;
     position: relative;
-    width: 199px;
-    height: 33px;
+    width: 99px;
     line-height: 31px;
     padding: 0 11px;
     border: 1px solid black;
@@ -41,9 +41,22 @@ tahiti-dropdown-select {
 .tahiti-dropdown-select__control {
     display: block;
     position: absolute;
-    width: 198px;
-    height: 33px;
-    left: 0;
+    width: 97px;
+    left: 1px;
     top: 0;
     opacity: 0;
+    cursor: pointer;
+}
+
+.tahiti-dropdown-select__cover,
+.tahiti-dropdown-select__control {
+    height: 33px;
+}
+
+.tahiti-dropdown-select__cover--large {
+    width: 199px;
+}
+
+.tahiti-dropdown-select__control--large {
+    width: 197px;
 }
