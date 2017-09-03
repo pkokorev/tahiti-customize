@@ -1,12 +1,33 @@
 (function (ng, papa) {
     'use strict';
 
-    function calculateTotalPrice(db, criteria) {
-        var tissueCost = db.sizes[criteria.sizeId].tissueFactor * db.tissues[criteria.tissueId].price;
-        var laceworkCost = db.sizes[criteria.sizeId].laceworkFactor * db.laces[criteria.laceId].price;
-        var flowerCost = db.sizes[criteria.sizeId].flowerFactor * db.flowers[criteria.flowerId].price;
-        var deliveryCost = db.deliveries[criteria.deliveryId].price;
-        return tissueCost + laceworkCost + flowerCost + deliveryCost;
+    function calculateTotalPrice(db, criteria, log) {
+        if (!criteria || !criteria.sizeId) {
+            return 0;
+        }
+        var size = db.sizes[criteria.sizeId];
+        var cost = {
+            tissueCost: criteria.tissueId ? (size.tissueFactor || 0) * (db.tissues[criteria.tissueId].price || 0) : 0,
+            laceworkCost: criteria.laceId ? (size.laceworkFactor || 0) * (db.laces[criteria.laceId].price || 0) : 0,
+            flowerCost: criteria.flowerId ? (size.flowerFactor || 0) * (db.flowers[criteria.flowerId].price || 0) : 0,
+            deliveryCost: criteria.deliveryId ? (db.deliveries[criteria.deliveryId].price || 0) : 0,
+            threadCost: size.threadPrice || 0,
+            elasticCost: size.elasticPrice || 0,
+            nacreCost: size.nacrePrice || 0,
+            craftingCost: criteria.crafted === 'true' ? size.craftingPrice || 0 : 0,
+            cartonCost: criteria.crafted === 'false' ? size.cartonPrice || 0 : 0
+        };
+
+        cost.total = cost.tissueCost + cost.laceworkCost + cost.flowerCost
+            + cost.deliveryCost
+            + cost.threadCost + cost.elasticCost + cost.nacreCost
+            + cost.craftingCost + cost.cartonCost;
+
+        if (log) {
+            log.info('Calculated cost', cost);
+        }
+
+        return cost;
     }
 
     function mapById(array, idProperty) {
@@ -52,13 +73,14 @@
                 }
             };
         }])
-        .controller('DressConfigCtrl', ['$scope', '$dataFactory', function (scope, dataFactory) {
+        .controller('DressConfigCtrl', ['$scope', '$dataFactory', '$log', function (scope, dataFactory, log) {
             scope.criteria = {
                 sizeId: '2_medium',
                 tissueId: '3_t',
                 laceId: '5_l',
                 flowerId: '6_f',
-                deliveryId: '4_d'
+                deliveryId: '4_d',
+                crafted: 'true'
             };
             scope.total = {
                 scope: 0,
@@ -84,7 +106,7 @@
                         loadedLists.push(dataList);
                         if (dataLists.length === loadedLists.length) {
                             scope.$watch('criteria', function (value) {
-                                scope.total.amount = calculateTotalPrice(dataFactory.db(), value || {});
+                                scope.total.amount = calculateTotalPrice(dataFactory.db(), value || {}, log).total;
                             }, true);
                         }
                     });

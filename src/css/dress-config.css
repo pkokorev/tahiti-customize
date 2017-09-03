@@ -100,10 +100,11 @@ main {
     }
 
     #delivery-section {
-        clear: both;
+        clear: left;
     }
 
     #delivery-dropdown,
+    #crafted-dropdown,
     #dress-description {
         float: left;
     }

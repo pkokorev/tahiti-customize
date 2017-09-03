@@ -25,10 +25,10 @@
 <main ng-app="DressConfigApp">
 
     <initial-loader class="tenant-loader"
-        data-preload-img-01="img/model_round--back.png"
-        data-preload-img-02="img/model_round--front.png"
-        data-preload-img-03="img/model_skinny--back.png"
-        data-preload-img-04="img/model_skinny--front.png"></initial-loader>
+                    data-preload-img-01="img/model_round--back.png"
+                    data-preload-img-02="img/model_round--front.png"
+                    data-preload-img-03="img/model_skinny--back.png"
+                    data-preload-img-04="img/model_skinny--front.png"></initial-loader>
 
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
@@ -74,6 +74,11 @@
                                     caption-icon="img/icon_delivery.png"
                                     items="lists.deliveries"
                                     ng-model="criteria.deliveryId"></tahiti-dropdown-select>
+            <tahiti-dropdown-select id="crafted-dropdown"
+                                    caption-title="Cousu"
+                                    caption-icon="img/icon_sewn.png"
+                                    items="[{id: 'true', label: 'Oui'}, {id: 'false', label: 'Non'}]"
+                                    ng-model="criteria.crafted"></tahiti-dropdown-select>
             <article id="dress-description" class="dress-config__description">
                 <tahiti-caption caption-title="Description"
                                 caption-icon="img/icon_description.png"></tahiti-caption>
@@ -123,7 +128,7 @@
 
     <script id="/tahiti-total-price.html" type="text/ng-template">
         <p class="tahiti-total-price__paragraph">
-            <span>Total</span>
+            <span>Prix</span>
             <span class="tahiti-total-price__amount"
                   ng-bind="total.amount | number:2"></span><span class="tahiti-total-price__currency"
                                                                  ng-bind="::total.currency"></span>
