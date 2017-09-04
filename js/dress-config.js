@@ -93,7 +93,9 @@
                 flowers: [],
                 deliveries: []
             };
-            scope.dressImages = [];
+            scope.toggle = {
+                sizesDescription: false
+            };
             scope.description =
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis leo feugiat sem porta ' +
                 'malesuada non sed urna. Phasellus sapien libero, varius vestibulum libero id, condimentum ' +
@@ -118,9 +120,19 @@
                 restrict: 'E',
                 scope: {
                     captionTitle: '@',
-                    captionIcon: '@?'
+                    captionIcon: '@?',
+                    toggleObject: '=?',
+                    toggleKey: '@?'
                 },
-                templateUrl: '/tahiti-caption.html'
+                templateUrl: '/tahiti-caption.html',
+                link: function (scope) {
+                    scope.hasToggle = function () {
+                        return scope.toggleObject && scope.toggleKey;
+                    };
+                    scope.toggle = function () {
+                        scope.toggleObject[scope.toggleKey] = !scope.toggleObject[scope.toggleKey];
+                    };
+                }
             };
         }])
         .directive('tahitiRadioGroup', [function () {
@@ -131,6 +143,8 @@
                     id: '@',
                     captionTitle: '@',
                     captionIcon: '@?',
+                    toggleObject: '=?',
+                    toggleKey: '@?',
                     desktopLayout: '@?',
                     mobileLayout: '@?',
                     tiles: '@?',
@@ -139,6 +153,7 @@
                 },
                 templateUrl: '/tahiti-radio-group.html',
                 link: function (scope, element, attrs, ngModel) {
+                    window.console.log('Toggle', scope.toggleObject, scope.toggleKey);
                     scope.local = {
                         items: scope.items,
                         selectedId: scope.ngModel,
@@ -236,6 +251,25 @@
 
                     scope.$watch('criteria', function (criteria) {
                         shape = calculateShape(criteria.sizeId);
+                    }, true);
+                }
+            };
+        }])
+        .directive('tahitiSizesDescription', ['$animate', function (animate) {
+            return {
+                restrict: 'E',
+                scope: {
+                    sizes: '=',
+                    toggle: '='
+                },
+                templateUrl: '/tahiti-sizes-description.html',
+                link: function (scope, element) {
+                    scope.$watch('toggle', function (toggle) {
+                        if (toggle.sizesDescription) {
+                            animate.removeClass(element, 'tahiti-sizes-description--off');
+                        } else {
+                            animate.addClass(element, 'tahiti-sizes-description--off');
+                        }
                     }, true);
                 }
             };

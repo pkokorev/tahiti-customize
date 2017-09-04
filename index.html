@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="css/tahiti-radio-group.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-dropdown-select.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-dress-slider.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tahiti-sizes-description.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
@@ -36,18 +37,21 @@
                                 class="silhouette-sizes-aside"
                                 caption-title="Taille"
                                 caption-icon="img/icon_size.png"
+                                toggle-object="toggle"
+                                toggle-key="sizesDescription"
                                 mobile-layout="vertical"
                                 items="lists.sizes"
                                 ng-model="criteria.sizeId"></tahiti-radio-group>
-            <div id="silhouette-main-content" class="silhouette-main-content">
+            <div id="silhouette-main-content" class="dress-config__silhouette-main-content">
                 <tahiti-total-price id="silhouette-section-price"
                                     class="tahiti-total-price--integrated"
                                     total="total"></tahiti-total-price>
-                <div id="silhouette-section-image-slider">
-                    <tahiti-dress-slider criteria="criteria"
-                                         initial-variant="front"
-                                         tissues="lists.tissues"></tahiti-dress-slider>
-                </div>
+                <tahiti-dress-slider criteria="criteria"
+                                     initial-variant="front"
+                                     tissues="lists.tissues"></tahiti-dress-slider>
+                <tahiti-sizes-description class="tahiti-sizes-description"
+                                          toggle="toggle"
+                                          sizes="lists.sizes"></tahiti-sizes-description>
             </div>
         </section>
         <section id="dress-configuration-options-section" class="clear-fix">
@@ -98,11 +102,15 @@
                  class="tahiti-caption__icon"
                  alt="{{::captionTitle}}"/>
             <span class="tahiti-caption__text" ng-bind="::captionTitle"></span>
+            <sup class="tahiti-caption__info" ng-if="hasToggle()" ng-click="toggle()">?</sup>
         </h2>
     </script>
 
     <script id="/tahiti-radio-group.html" type="text/ng-template">
-        <tahiti-caption caption-title="{{captionTitle}}" caption-icon="{{captionIcon}}"></tahiti-caption>
+        <tahiti-caption caption-title="{{captionTitle}}"
+                        caption-icon="{{captionIcon}}"
+                        toggle-object="toggleObject"
+                        toggle-key="{{toggleKey}}"></tahiti-caption>
         <ul class="tahiti-radio-group__layout clear-fix"
             ng-class="[
                 'tahiti-radio-group__layout--desktop-' + local.desktopLayout,
@@ -180,6 +188,25 @@
                 ng-click="rotate()">
             <img class="tahiti-dress-slider__rotate_icon" src="img/icon_rotate.png"/>
         </button>
+    </script>
+
+    <script id="/tahiti-sizes-description.html" type="text/ng-template">
+        <table class="tahiti-sizes-description__table">
+            <thead>
+            <tr>
+                <th>Epaules</th>
+                <th>Hanche</th>
+                <th>Long.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="size in sizes">
+                <td ng-bind="size.shouldersSize"></td>
+                <td ng-bind="size.hipSize"></td>
+                <td ng-bind="size.dressLength"></td>
+            </tr>
+            </tbody>
+        </table>
     </script>
 
 </main>

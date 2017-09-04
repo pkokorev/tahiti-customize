@@ -56,6 +56,10 @@ button {
     box-sizing: border-box;
 }
 
+.dress-config__silhouette-main-content {
+    position: relative;
+}
+
 .dress-config__description {
     max-width: 638px;
 }
@@ -80,7 +84,7 @@ button {
         float: right;
     }
 
-    .silhouette-main-content {
+    .dress-config__silhouette-main-content {
         width: auto;
         float: none;
         margin-right: 110px;
@@ -131,7 +135,7 @@ button {
         float: left;
     }
 
-    .silhouette-main-content {
+    .dress-config__silhouette-main-content {
         width: auto;
         float: none;
         margin-left: 125px;
