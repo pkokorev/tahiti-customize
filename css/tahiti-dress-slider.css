@@ -9,10 +9,6 @@ tahiti-dress-slider {
     overflow: hidden;
 }
 
-.tahiti-dress-slider__body {
-    background-size: cover;
-}
-
 .tahiti-dress-slider__dress-container,
 .tahiti-dress-slider__dress-image,
 .tahiti-dress-slider__body {
@@ -36,22 +32,6 @@ tahiti-dress-slider {
     filter: 'FlipH';
 }
 
-.tahiti-dress-slider__body-skinny--front {
-    background-image: url("../img/model_skinny--front.png");
-}
-
-.tahiti-dress-slider__body-skinny--back {
-    background-image: url("../img/model_skinny--back.png");
-}
-
-.tahiti-dress-slider__body-round--front {
-    background-image: url("../img/model_round--front.png");
-}
-
-.tahiti-dress-slider__body-round--back {
-    background-image: url("../img/model_round--back.png");
-}
-
 .tahiti-dress-slider__rotate {
     width: 44px;
     height: 44px;
@@ -69,6 +49,7 @@ tahiti-dress-slider {
 @media only screen and (max-width: 767px) {
 
     .tahiti-dress-slider__body,
+    .tahiti-dress-slider__body-image,
     .tahiti-dress-slider__canvas,
     .tahiti-dress-slider__dress-image,
     .tahiti-dress-slider__dress-container {
@@ -81,6 +62,7 @@ tahiti-dress-slider {
 @media only screen and (min-width: 768px) {
 
     .tahiti-dress-slider__body,
+    .tahiti-dress-slider__body-image,
     .tahiti-dress-slider__canvas,
     .tahiti-dress-slider__dress-image,
     .tahiti-dress-slider__dress-container {

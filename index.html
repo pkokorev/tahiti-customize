@@ -25,10 +25,10 @@
 <main ng-app="DressConfigApp" class="dress-config__container">
 
     <initial-loader class="tenant-loader"
-                    data-preload-img-01="img/model_round--back.png"
-                    data-preload-img-02="img/model_round--front.png"
-                    data-preload-img-03="img/model_skinny--back.png"
-                    data-preload-img-04="img/model_skinny--front.png"></initial-loader>
+                    data-preload-img-01="img/model-round--back.png"
+                    data-preload-img-02="img/model-round--front.png"
+                    data-preload-img-03="img/model-skinny--back.png"
+                    data-preload-img-04="img/model-skinny--front.png"></initial-loader>
 
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
@@ -170,8 +170,10 @@
                      ng-class="'tahiti-dress-slider__dress-image--' + getVariant()"
                      class="tahiti-dress-slider__dress-image"/>
             </div>
-            <div class="tahiti-dress-slider__body"
-                 ng-class="'tahiti-dress-slider__body-' + getShape() + '--' + getVariant()"></div>
+            <div class="tahiti-dress-slider__body">
+                <img class="tahiti-dress-slider__body-image"
+                     ng-src="{{'img/model-' + getShape() + '--' + getVariant() + '.png'}}"/>
+            </div>
         </div>
         <button class="tahiti-dress-slider__rotate"
                 type="button"
