@@ -18,10 +18,10 @@
             cartonCost: criteria.crafted === 'false' ? size.cartonPrice || 0 : 0
         };
 
-        cost.total = cost.tissueCost + cost.laceworkCost + cost.flowerCost
+        cost.total = (cost.tissueCost + cost.laceworkCost + cost.flowerCost
             + cost.deliveryCost
             + cost.threadCost + cost.elasticCost + cost.nacreCost
-            + cost.craftingCost + cost.cartonCost;
+            + cost.craftingCost + cost.cartonCost) * (!!cost.tissueCost ? 1 : 0);
 
         if (log) {
             log.info('Calculated cost', cost);
