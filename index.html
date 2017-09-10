@@ -25,18 +25,12 @@
 <header style="display: block; height: 88px; background: #961326;"></header>
 <main ng-app="DressConfigApp" class="dress-config__container">
 
-    <initial-loader class="tenant-loader"
-                    data-preload-img-01="img/model-round--back.png"
-                    data-preload-img-02="img/model-round--front.png"
-                    data-preload-img-03="img/model-skinny--back.png"
-                    data-preload-img-04="img/model-skinny--front.png"></initial-loader>
-
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
             <tahiti-radio-group id="silhouette-sizes-selection"
                                 class="silhouette-sizes-aside"
                                 caption-title="Taille"
-                                caption-icon="img/icon_size.png"
+                                caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073bb4ae8icon_size.png"
                                 toggle-object="toggle"
                                 toggle-key="sizesDescription"
                                 mobile-layout="vertical"
@@ -48,6 +42,8 @@
                                     total="total"></tahiti-total-price>
                 <tahiti-dress-slider criteria="criteria"
                                      initial-variant="front"
+                                     sizes="lists.sizes"
+                                     models="lists.models"
                                      tissues="lists.tissues"></tahiti-dress-slider>
                 <tahiti-sizes-description class="tahiti-sizes-description"
                                           toggle="toggle"
@@ -57,37 +53,37 @@
         <section id="dress-configuration-options-section" class="clear-fix">
             <tahiti-radio-group id="tissue-selection"
                                 caption-title="Tissu"
-                                caption-icon="img/icon_palette.png"
+                                caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b5c9eaicon_palette.png"
                                 tiles="true"
                                 items="lists.tissues"
                                 ng-model="criteria.tissueId"></tahiti-radio-group>
             <tahiti-radio-group id="laces-selection"
                                 caption-title="Dentelle"
-                                caption-icon="img/icon_laces.png"
+                                caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b3f596icon_laces.png"
                                 items="lists.laces"
                                 ng-model="criteria.laceId"></tahiti-radio-group>
             <tahiti-radio-group id="flower-selection"
                                 caption-title="Fleur"
-                                caption-icon="img/icon_flower.png"
+                                caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b22166icon_flower.png"
                                 items="lists.flowers"
                                 ng-model="criteria.flowerId"></tahiti-radio-group>
         </section>
         <section id="delivery-section" class="clear-fix">
             <tahiti-dropdown-select id="delivery-dropdown"
                                     caption-title="Livraison"
-                                    caption-icon="img/icon_delivery.png"
+                                    caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073ae46bficon_delivery.png"
                                     large="true"
                                     items="lists.deliveries"
                                     ng-model="criteria.deliveryId"></tahiti-dropdown-select>
             <tahiti-dropdown-select id="crafted-dropdown"
                                     caption-title="Cousu"
-                                    caption-icon="img/icon_sewn.png"
+                                    caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b977bcicon_sewn.png"
                                     items="[{id: 'true', label: 'Oui'}, {id: 'false', label: 'Non'}]"
                                     ng-model="criteria.crafted"></tahiti-dropdown-select>
             <div id="dress-description" class="dress-config__description">
                 <tahiti-caption caption-title="Description"
-                                caption-icon="img/icon_description.png"></tahiti-caption>
-                <p class="dress-config__description-text" ng-bind="::description"></p>
+                                caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b051b5icon_description.png"></tahiti-caption>
+                <p class="dress-config__description-text" ng-bind-html="description.getHtml()"></p>
             </div>
             <tahiti-total-price id="total-price-bottom"
                                 class="tahiti-total-price--standalone"
@@ -132,7 +128,7 @@
                     <span class="tahiti-radio-button__mark" ng-if="::(!local.tiles)"></span>
                     <span class="tahiti-radio-button__text" ng-if="::(!local.tiles)" ng-bind="::item.label"></span>
                     <span class="tahiti-radio-button__tile" ng-if="::local.tiles">
-                        <img class="tahiti-radio-button__image" ng-src="{{item.icon}}"/>
+                        <img class="tahiti-radio-button__image" ng-src="{{imageUrl(item.icon.path)}}"/>
                     </span>
                 </label>
             </li>
@@ -171,22 +167,23 @@
 
     <script id="/tahiti-dress-slider.html" type="text/ng-template">
         <div class="tahiti-dress-slider__canvas">
-            <div class="tahiti-dress-slider__dress-container">
+            <div class="tahiti-dress-slider__dress-container" ng-show="criteria.tissueId" ng-cloak="">
                 <img ng-repeat="tissue in tissues"
-                     ng-src="{{tissue.canvas}}"
+                     ng-src="{{canvasImageUrl(tissue.canvas.path)}}"
                      ng-show="tissue.id === criteria.tissueId"
                      ng-class="'tahiti-dress-slider__dress-image--' + getVariant()"
                      class="tahiti-dress-slider__dress-image"/>
             </div>
             <div class="tahiti-dress-slider__body">
                 <img class="tahiti-dress-slider__body-image"
-                     ng-src="{{'img/model-' + getShape() + '--' + getVariant() + '.png'}}"/>
+                     ng-src="{{modelImageUrl()}}"/>
             </div>
         </div>
         <button class="tahiti-dress-slider__rotate"
                 type="button"
                 ng-click="rotate()">
-            <img class="tahiti-dress-slider__rotate_icon" src="img/icon_rotate.png"/>
+            <img class="tahiti-dress-slider__rotate_icon"
+                 src="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b7a056icon_rotate.png"/>
         </button>
     </script>
 
