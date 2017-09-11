@@ -1,5 +1,6 @@
 tahiti-caption {
     display: block;
+    position: relative;
 }
 
 .tahiti-caption {
@@ -10,6 +11,7 @@ tahiti-caption {
 }
 
 .tahiti-caption__icon {
+    border: none;
     display: inline-block;
     width: 44px;
     height: 44px;
@@ -27,4 +29,7 @@ tahiti-caption {
     display: inline;
     vertical-align: top;
     cursor: pointer;
+    position: absolute;
+    left: 36px;
+    top: 0;
 }

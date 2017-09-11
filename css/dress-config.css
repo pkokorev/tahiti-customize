@@ -6,9 +6,7 @@ body {
     padding: 0;
 }
 
-h1,
-h2,
-p {
+.dress-config-text {
     margin: 0;
     padding: 0;
     font-size: 1rem;
@@ -16,17 +14,13 @@ p {
     text-decoration: none;
 }
 
-ul {
+.dress-config-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-img {
-    border: none;
-}
-
-button {
+.dress-config-button {
     background: none;
     border: none;
     cursor: pointer;
@@ -34,6 +28,13 @@ button {
     display: block;
     padding: 0;
     margin: 0;
+}
+
+.dress-config {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
 }
 
 .clear-fix:after {

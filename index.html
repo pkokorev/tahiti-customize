@@ -12,6 +12,8 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.5/papaparse.min.js"></script>
     <script type="text/javascript"
             src="js/dress-config.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-csp.css"/>
     <link rel="stylesheet" type="text/css" href="css/dress-config.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-caption.css"/>
     <link rel="stylesheet" type="text/css" href="css/tahiti-total-price.css"/>
@@ -23,7 +25,7 @@
 </head>
 <body>
 <header style="display: block; height: 88px; background: #961326;"></header>
-<main ng-app="DressConfigApp" class="dress-config__container">
+<main id="dress-config-app" class="dress-config__container ng-hide" ng-show="true">
 
     <article ng-controller="DressConfigCtrl" class="dress-config clear-fix">
         <section id="silhouette-section" class="clear-fix">
@@ -83,7 +85,7 @@
             <div id="dress-description" class="dress-config__description">
                 <tahiti-caption caption-title="Description"
                                 caption-icon="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b051b5icon_description.png"></tahiti-caption>
-                <p class="dress-config__description-text" ng-bind-html="description.getHtml()"></p>
+                <p class="dress-config__description-text dress-config-text" ng-bind-html="description.getHtml()"></p>
             </div>
             <tahiti-total-price id="total-price-bottom"
                                 class="tahiti-total-price--standalone"
@@ -92,13 +94,13 @@
     </article>
 
     <script id="/tahiti-caption.html" type="text/ng-template">
-        <h2 class="tahiti-caption">
+        <h2 class="tahiti-caption dress-config-text">
             <img ng-if="captionIcon"
                  ng-src="{{::captionIcon}}"
                  class="tahiti-caption__icon"
                  alt="{{::captionTitle}}"/>
+            <sup class="tahiti-caption__info" ng-if="hasToggle()" ng-click="toggle()">ⓘ</sup>
             <span class="tahiti-caption__text" ng-bind="::captionTitle"></span>
-            <sup class="tahiti-caption__info" ng-if="hasToggle()" ng-click="toggle()">?</sup>
         </h2>
     </script>
 
@@ -107,7 +109,7 @@
                         caption-icon="{{captionIcon}}"
                         toggle-object="toggleObject"
                         toggle-key="{{toggleKey}}"></tahiti-caption>
-        <ul class="tahiti-radio-group__layout clear-fix"
+        <ul class="tahiti-radio-group__layout dress-config-list clear-fix"
             ng-class="[
                 'tahiti-radio-group__layout--desktop-' + local.desktopLayout,
                 'tahiti-radio-group__layout--mobile-' + local.mobileLayout,
@@ -136,7 +138,7 @@
     </script>
 
     <script id="/tahiti-total-price.html" type="text/ng-template">
-        <p class="tahiti-total-price__paragraph">
+        <p class="tahiti-total-price__paragraph dress-config-text">
             <span>Prix</span>
             <span class="tahiti-total-price__amount"
                   ng-bind="total.amount | number:2"></span><span class="tahiti-total-price__currency"
@@ -179,10 +181,10 @@
                      ng-src="{{modelImageUrl()}}"/>
             </div>
         </div>
-        <button class="tahiti-dress-slider__rotate"
+        <button class="tahiti-dress-slider__rotate dress-config-button"
                 type="button"
                 ng-click="rotate()">
-            <img class="tahiti-dress-slider__rotate_icon"
+            <img class="tahiti-caption__icon"
                  src="https://brandizi.fr/dress/cockpit/storage/uploads/2017/09/10/59b5073b7a056icon_rotate.png"/>
         </button>
     </script>
@@ -208,5 +210,8 @@
 
 </main>
 <footer style="display: block; height: 88px; background: black;"></footer>
+<script type="text/javascript">
+    angular.bootstrap(document.getElementById('dress-config-app'), ['DressConfigApp']);
+</script>
 </body>
 </html>

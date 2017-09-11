@@ -10,6 +10,7 @@ tahiti-radio-group {
 .tahiti-radio-button__line {
     min-height: 22px;
     margin-bottom: 11px;
+    padding: 0;
 }
 
 .tahiti-radio-button__label {
@@ -79,6 +80,7 @@ tahiti-radio-group {
 }
 
 .tahiti-radio-button__image {
+    border: none;
     width: 38px;
     height: 38px;
     display: block;

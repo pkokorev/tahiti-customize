@@ -9,6 +9,11 @@ tahiti-dress-slider {
     overflow: hidden;
 }
 
+.tahiti-dress-slider__dress-image,
+.tahiti-dress-slider__body-image{
+    border: none;
+}
+
 .tahiti-dress-slider__dress-container,
 .tahiti-dress-slider__dress-image,
 .tahiti-dress-slider__body {
@@ -39,11 +44,6 @@ tahiti-dress-slider {
     left: 0;
     bottom: 0;
     cursor: pointer;
-}
-
-.tahiti-dress-slider__rotate_icon {
-    width: 44px;
-    height: 44px;
 }
 
 @media only screen and (max-width: 767px) {
