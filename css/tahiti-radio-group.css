@@ -8,6 +8,7 @@ tahiti-radio-group {
 }
 
 .tahiti-radio-button__line {
+    display: block;
     min-height: 22px;
     margin-bottom: 11px;
     padding: 0;

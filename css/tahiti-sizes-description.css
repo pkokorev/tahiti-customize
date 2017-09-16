@@ -32,9 +32,16 @@ tahiti-sizes-description {
     width: 100%;
 }
 
-.tahiti-sizes-description__table thead {
+.tahiti-sizes-description__table thead,
+.tahiti-sizes-description__table th {
     color: #961326;
     background: white;
+}
+
+.tahiti-sizes-description__table td,
+.tahiti-sizes-description__table th {
+    background: transparent;
+    border: none;
 }
 
 .tahiti-sizes-description__table th {

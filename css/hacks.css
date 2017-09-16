@@ -1,0 +1,41 @@
+.dress-config__container,
+.dress-config {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    color: #333333;
+}
+
+.dress-config__container {
+    float: left;
+    width: 100%;
+}
+
+.dress-config label span {
+    color: #333333;
+}
+
+.tahiti-sizes-description__table thead tr th {
+    color: #961326;
+    font-weight: bold;
+}
+
+.tahiti-sizes-description__table thead tr th,
+.tahiti-sizes-description__table tbody tr td,
+.tahiti-sizes-description__table tbody tr:nth-child(2n+1) td {
+    background: transparent;
+    border: none;
+    color: black;
+    text-align: left;
+}
+
+.tahiti-dropdown-select__content .selection-box {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+}

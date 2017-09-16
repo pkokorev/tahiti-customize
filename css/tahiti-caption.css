@@ -25,11 +25,12 @@ tahiti-caption {
 .tahiti-caption__info {
     color: #961326;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: lighter;
     display: inline;
     vertical-align: top;
     cursor: pointer;
     position: absolute;
     left: 36px;
     top: 0;
+    text-transform: lowercase;
 }
