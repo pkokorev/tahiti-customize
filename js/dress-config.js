@@ -66,7 +66,7 @@
     }
 
     ng.module('DressConfigApp', ['ngAnimate'])
-        .constant('COCKPIT_ROOT', 'http://etahiti-customize.com/cockpit')
+        .constant('COCKPIT_ROOT', 'https://etahiti-customize.com/cockpit')
         .config(['$sceDelegateProvider', 'COCKPIT_ROOT', function (sceDelegateProvider, root) {
             sceDelegateProvider.resourceUrlWhitelist(['self', root + '/**']);
         }])
