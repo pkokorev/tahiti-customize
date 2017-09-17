@@ -66,6 +66,7 @@
     }
 
     ng.module('DressConfigApp', ['ngAnimate'])
+        .constant('HOST_ROOT', 'https://etahiti-customize.com')
         .constant('COCKPIT_ROOT', 'https://etahiti-customize.com/cockpit')
         .config(['$sceDelegateProvider', 'COCKPIT_ROOT', function (sceDelegateProvider, root) {
             sceDelegateProvider.resourceUrlWhitelist(['self', root + '/**']);
@@ -113,7 +114,38 @@
                 }
             };
         }])
-        .controller('DressConfigCtrl', ['$scope', '$dataFactory', '$sce', '$log', function (scope, dataFactory, sce, log) {
+        .factory('$formFactory', ['$q', '$http', '$log', function (q, http, log) {
+            return {
+                submit: function (formName) {
+                    var deferred = q.defer();
+
+                    var form = document.getElementById(formName),
+                        actionUrl = ng.element(form).attr('action');
+
+                    var xhr = new XMLHttpRequest(),
+                        data = new FormData(form);
+
+                    xhr.onload = function () {
+                        if (xhr.status === 200 && xhr.responseText !== 'false') {
+                            form.reset();
+                            log.debug('Form ' + formName + ' submit success');
+
+                            deferred.resolve();
+                        } else {
+                            log.warn('Form ' + formName + ' submit failure');
+
+                            deferred.reject();
+                        }
+                    };
+
+                    xhr.open('POST', actionUrl, true);
+                    xhr.send(data);
+
+                    return deferred.promise;
+                }
+            };
+        }])
+        .controller('DressConfigCtrl', ['$scope', '$dataFactory', '$formFactory', '$timeout', '$sce', '$log', function (scope, dataFactory, formFactory, timeout, sce, log) {
             scope.criteria = {
                 sizeId: '2_medium',
                 deliveryId: '1_d',
@@ -141,6 +173,33 @@
                     return sce.trustAsHtml(scope.description.html);
                 }
             };
+            scope.dressConfig = {
+                data: {
+                    email: null,
+                    criteria: null
+                },
+                progress: false,
+                sent: false,
+                send: function () {
+                    if (scope.configForm.$invalid) {
+                        return false;
+                    }
+
+                    scope.dressConfig.progress = true;
+
+                    formFactory.submit('configForm').then(function () {
+                        scope.dressConfig.progress = false;
+                        timeout(function () {
+                            scope.dressConfig.sent = true;
+                        });
+                    }, function () {
+                        log.error('Failed to submit dress config data');
+                    });
+
+                    return true;
+                }
+            };
+
 
             (function (dataLists, loadedLists) {
                 ng.forEach(dataLists, function (dataList) {
@@ -149,6 +208,7 @@
                         loadedLists.push(dataList);
                         if (Object.keys(dataLists).length === loadedLists.length) {
                             scope.$watch('criteria', function (value) {
+                                scope.dressConfig.data.criteria = JSON.stringify(ng.extend({}, value));
                                 scope.total.amount = calculateTotalPrice(dataFactory.db(), value || {}, log).total;
                             }, true);
                             scope.criteria.loaded = true;
@@ -352,6 +412,51 @@
                             animate.addClass(element, 'tahiti-sizes-description--off');
                         }
                     }, true);
+                }
+            };
+        }])
+        .directive('cockpitForm', ['$http', 'HOST_ROOT', function (http, HOST_ROOT) {
+            function findForm(elementsArray, formName) {
+                var result = null;
+                ng.forEach(elementsArray, function (element) {
+                    if (element
+                        && element.tagName && element.tagName.toLowerCase() === 'form'
+                        && element.name && element.name === formName) {
+                        result = element;
+                    }
+                });
+                return ng.element(result);
+            }
+
+            function findCsrfInput(formInputsArray) {
+                var result = null;
+                ng.forEach(formInputsArray, function (input) {
+                    if (input
+                        && input.name && input.name === '__csrf') {
+                        result = input;
+                    }
+                });
+                return result;
+            }
+
+            return {
+                scope: {
+                    cockpitForm: '@'
+                },
+                link: function (scope, element) {
+                    http({
+                        method: 'GET',
+                        url: HOST_ROOT + '/customforms/' + scope.cockpitForm + '.php'
+                    }).then(function (result) {
+                        var generatedHtml = ng.element(String(result.data)),
+                            generatedForm = findForm(generatedHtml, scope.cockpitForm),
+                            generatedUrl = generatedForm.attr('action'),
+                            generatedCsrf = findCsrfInput(generatedForm.find('input'));
+
+                        ng.element(element)
+                            .attr('action', HOST_ROOT + generatedUrl)
+                            .prepend(generatedCsrf);
+                    });
                 }
             };
         }]);

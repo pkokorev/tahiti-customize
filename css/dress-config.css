@@ -66,6 +66,47 @@
     background: #fafafa;
 }
 
+.tahiti-form,
+.tahiti-form-fields {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.tahiti-form {
+    clear: both;
+    margin: 11px;
+}
+
+.tahiti-form-field {
+    width: 199px;
+    height: 33px;
+    line-height: 31px;
+    border: 1px solid black;
+    padding: 11px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.tahiti-form-field.ng-dirty.ng-invalid {
+    border: 1px solid #961326;
+}
+
+.tahiti-submit-button {
+    width: 99px;
+    height: 33px;
+    line-height: 31px;
+    border: 1px solid black;
+    background: #961326;
+    color: white;
+    font-weight: bold;
+}
+
+.tahiti-submit-button:disabled {
+    background: grey;
+}
+
 @media only screen and (max-width: 767px) {
 
     .silhouette-sizes-aside {
@@ -77,6 +118,10 @@
         width: auto;
         float: none;
         margin-right: 110px;
+    }
+
+    .tahiti-form-fields {
+        margin: 11px 0 22px 0;
     }
 }
 
@@ -131,4 +176,12 @@
         margin-right: 39px;
     }
 
+    .tahiti-form-fields {
+        float: left;
+    }
+
+    .tahiti-submit-button {
+        float: left;
+        margin-left: 33px;
+    }
 }

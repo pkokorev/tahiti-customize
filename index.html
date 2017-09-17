@@ -91,6 +91,21 @@
             <tahiti-total-price id="total-price-bottom"
                                 class="tahiti-total-price--standalone"
                                 total="total"></tahiti-total-price>
+            <form id="configForm" name="configForm" cockpit-form="configForm" ng-hide="dressConfig.sent"
+                  novalidate="novalidate" class="tahiti-form clear-fix">
+                <fieldset name="configFields" class="tahiti-form-fields" ng-disabled="dressConfig.progress">
+                    <input id="config-email" type="email" name="form[email]" placeholder="Votre email"
+                           ng-model="dressConfig.data.email" class="tahiti-form-field" required="required"/>
+                    <input id="config-criteria" type="hidden" name="form[criteria]"
+                           ng-value="dressConfig.data.criteria"/>
+                </fieldset>
+                <button type="submit" role="button" class="dress-config-button tahiti-submit-button"
+                        ng-disabled="dressConfig.progress || (configForm.$submitted && configForm.$invalid)"
+                        ng-bind="'Envoyer'" ng-click="dressConfig.send()"></button>
+            </form>
+            <form class="tahiti-form" ng-show="dressConfig.sent">
+                <p class="dress-config-text">Merci ! Votre configuration a été envoyée.</p>
+            </form>
         </section>
     </article>
 
