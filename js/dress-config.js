@@ -30,6 +30,22 @@
         return cost;
     }
 
+    function translateCriteriaKeys(criteria, i18n) {
+        var result = {};
+        ng.forEach(criteria, function (value, key) {
+            if (key !== 'loaded') {
+                if (i18n.hasOwnProperty(key)) {
+                    result[i18n[key]] = value;
+                } else {
+                    result[key] = value;
+                }
+            }
+        });
+        return JSON.stringify(result)
+            .replace(/[{}"]/g, '')
+            .replace(/,/g, '<br/>');
+    }
+
     function mapById(array, idProperty) {
         return (function (map) {
             if (ng.isArray(array)) {
@@ -68,6 +84,21 @@
     ng.module('DressConfigApp', ['ngAnimate'])
         .constant('HOST_ROOT', 'https://etahiti-customize.com')
         .constant('COCKPIT_ROOT', 'https://etahiti-customize.com/cockpit')
+        .constant('I18N', {
+            'criteria': {
+                'sizeId': 'Taille',
+                'tissueId': 'Tissu',
+                'laceId': 'Dentelle',
+                'flowerId': 'Fleur',
+                'deliveryId': 'Livraison',
+                'crafted': 'Cousu'
+            },
+            'form': {
+                'send': 'Envoyer',
+                'mail': 'Votre email',
+                'sent': 'Merci ! Votre configuration a été envoyée.'
+            }
+        })
         .config(['$sceDelegateProvider', 'COCKPIT_ROOT', function (sceDelegateProvider, root) {
             sceDelegateProvider.resourceUrlWhitelist(['self', root + '/**']);
         }])
@@ -145,7 +176,7 @@
                 }
             };
         }])
-        .controller('DressConfigCtrl', ['$scope', '$dataFactory', '$formFactory', '$timeout', '$sce', '$log', function (scope, dataFactory, formFactory, timeout, sce, log) {
+        .controller('DressConfigCtrl', ['$scope', '$dataFactory', '$formFactory', '$timeout', '$sce', '$log', 'I18N', function (scope, dataFactory, formFactory, timeout, sce, log, I18N) {
             scope.criteria = {
                 sizeId: '2_medium',
                 deliveryId: '1_d',
@@ -176,7 +207,8 @@
             scope.dressConfig = {
                 data: {
                     email: null,
-                    criteria: null
+                    criteria: null,
+                    price: null
                 },
                 progress: false,
                 sent: false,
@@ -199,7 +231,7 @@
                     return true;
                 }
             };
-
+            scope.i18n = ng.extend({}, I18N);
 
             (function (dataLists, loadedLists) {
                 ng.forEach(dataLists, function (dataList) {
@@ -208,8 +240,9 @@
                         loadedLists.push(dataList);
                         if (Object.keys(dataLists).length === loadedLists.length) {
                             scope.$watch('criteria', function (value) {
-                                scope.dressConfig.data.criteria = JSON.stringify(ng.extend({}, value));
                                 scope.total.amount = calculateTotalPrice(dataFactory.db(), value || {}, log).total;
+                                scope.dressConfig.data.criteria = translateCriteriaKeys(value, I18N.criteria);
+                                scope.dressConfig.data.price = scope.total.amount + ' ' + scope.total.currency;
                             }, true);
                             scope.criteria.loaded = true;
                         }

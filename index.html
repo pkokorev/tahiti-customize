@@ -32,7 +32,7 @@
         <section id="silhouette-section" class="clear-fix">
             <tahiti-radio-group id="silhouette-sizes-selection"
                                 class="silhouette-sizes-aside"
-                                caption-title="Taille"
+                                caption-title="{{i18n.criteria.sizeId}}"
                                 caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073bb4ae8icon_size.png"
                                 toggle-object="toggle"
                                 toggle-key="sizesDescription"
@@ -55,31 +55,31 @@
         </section>
         <section id="dress-configuration-options-section" class="clear-fix">
             <tahiti-radio-group id="tissue-selection"
-                                caption-title="Tissu"
+                                caption-title="{{i18n.lists.tissues}}"
                                 caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073b5c9eaicon_palette.png"
                                 tiles="true"
                                 items="lists.tissues"
                                 ng-model="criteria.tissueId"></tahiti-radio-group>
             <tahiti-radio-group id="laces-selection"
-                                caption-title="Dentelle"
+                                caption-title="{{i18n.criteria.laceId}}"
                                 caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073b3f596icon_laces.png"
                                 items="lists.laces"
                                 ng-model="criteria.laceId"></tahiti-radio-group>
             <tahiti-radio-group id="flower-selection"
-                                caption-title="Fleur"
+                                caption-title="{{i18n.criteria.flowerId}}"
                                 caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073b22166icon_flower.png"
                                 items="lists.flowers"
                                 ng-model="criteria.flowerId"></tahiti-radio-group>
         </section>
         <section id="delivery-section" class="clear-fix">
             <tahiti-dropdown-select id="delivery-dropdown"
-                                    caption-title="Livraison"
+                                    caption-title="{{i18n.criteria.deliveryId}}"
                                     caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073ae46bficon_delivery.png"
                                     large="true"
                                     items="lists.deliveries"
                                     ng-model="criteria.deliveryId"></tahiti-dropdown-select>
             <tahiti-dropdown-select id="crafted-dropdown"
-                                    caption-title="Cousu"
+                                    caption-title="{{i18n.criteria.crafted}}"
                                     caption-icon="https://etahiti-customize.com/cockpit/storage/uploads/2017/09/10/59b5073b977bcicon_sewn.png"
                                     items="[{id: 'true', label: 'Oui'}, {id: 'false', label: 'Non'}]"
                                     ng-model="criteria.crafted"></tahiti-dropdown-select>
@@ -94,17 +94,19 @@
             <form id="configForm" name="configForm" cockpit-form="configForm" ng-hide="dressConfig.sent"
                   novalidate="novalidate" class="tahiti-form clear-fix">
                 <fieldset name="configFields" class="tahiti-form-fields" ng-disabled="dressConfig.progress">
-                    <input id="config-email" type="email" name="form[email]" placeholder="Votre email"
+                    <input id="config-email" type="email" name="form[Expéditeur]" placeholder="{{::i18n.form.mail}}"
                            ng-model="dressConfig.data.email" class="tahiti-form-field" required="required"/>
-                    <input id="config-criteria" type="hidden" name="form[criteria]"
+                    <input id="config-criteria" type="hidden" name="form[Configuration]"
                            ng-value="dressConfig.data.criteria"/>
+                    <input id="config-price" type="hidden" name="form[Prix]"
+                           ng-value="dressConfig.data.price"/>
                 </fieldset>
                 <button type="submit" role="button" class="dress-config-button tahiti-submit-button"
                         ng-disabled="dressConfig.progress || (configForm.$submitted && configForm.$invalid)"
-                        ng-bind="'Envoyer'" ng-click="dressConfig.send()"></button>
+                        ng-bind="::i18n.form.send" ng-click="dressConfig.send()"></button>
             </form>
             <form class="tahiti-form" ng-show="dressConfig.sent">
-                <p class="dress-config-text">Merci ! Votre configuration a été envoyée.</p>
+                <p class="dress-config-text" ng-bind="::i18n.form.sent"></p>
             </form>
         </section>
     </article>
